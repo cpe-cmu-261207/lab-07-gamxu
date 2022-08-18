@@ -74,6 +74,25 @@ export default function Home() {
     return;
   }
 
+  const saveTodos = () => {
+    const todoStr = JSON.stringify(todos)
+    localStorage.setItem('react-todos', todoStr)
+  }
+
+  useEffect(()=> {const todoStr = localStorage.getItem('react-todos')
+    if(todoStr===null) setTodos([])
+    else setTodos(JSON.parse(todoStr))},[])
+
+  const [isFirstRender,setIsFirstRender] = useState(true)
+
+  useEffect(()=>{
+    if(isFirstRender){
+      setIsFirstRender(false)
+      return
+    }
+    saveTodos()
+  },[todos])
+
   return (
     <div>
       {/* Entire App container (required for centering) */}
