@@ -113,6 +113,7 @@ export default function Home() {
         {
           todos.map((todoElement,i)=>(
             <Todo
+              key={i}
               title={todoElement.title}
               completed={todoElement.completed}
               onMark={()=>markTodo(i)}
